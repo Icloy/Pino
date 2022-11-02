@@ -14,4 +14,6 @@ public class Mushroom : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    [SerializeField]
+    private GameObject go_mushroom_prefab; // 버섯 아이템
 }
