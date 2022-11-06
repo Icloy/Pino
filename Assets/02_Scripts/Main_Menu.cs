@@ -22,14 +22,14 @@ public class Main_Menu : MonoBehaviour
         Application.Quit();
     }
 
-    //可记 滚瓢 贸府
+    //可记 滚瓢 贸府 
     public void Option()
     {
         OptionPanel.SetActive(true);
     }
 
     //可记 菩澄 辆丰
-    public void OptionPanelOfff()
+    public void OptionPanelOff()
     {
         OptionPanel.SetActive(false);
     }
