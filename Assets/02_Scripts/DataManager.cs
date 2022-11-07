@@ -10,8 +10,8 @@ public class PlayerData // 데이터를 저장할 클래스
     public int HungryHp;
     public int WaterHp;
     public int MentalHp;
-    public string PlayerLocX;
-    public string PlayerLocZ;
+    public Vector3 playerPos;
+    //public Vector3 playerRot; 
 }
 
 
@@ -19,9 +19,7 @@ public class PlayerData // 데이터를 저장할 클래스
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance; //싱글톤
-
     public PlayerData nowPlayer = new PlayerData();
-
     public string path; // 저장경로 변수 생성
     public int nowSlot;
 

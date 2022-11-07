@@ -15,6 +15,7 @@ public class Main_Menu : MonoBehaviour
     public GameObject InputPanel;
     public Text[] slotText;
     public Text newPlayerName;
+    private GameObject player;
 
     bool[] savefile = new bool[3];
 
@@ -33,10 +34,8 @@ public class Main_Menu : MonoBehaviour
             {
                 slotText[i].text = "비어있는 슬롯";
             }
-
         }
         DataManager.instance.DataClear();
-
     }
 
     //게임씬 불러오기
@@ -46,7 +45,6 @@ public class Main_Menu : MonoBehaviour
         {
             DataManager.instance.nowPlayer.UserName = newPlayerName.text;
             DataManager.instance.SaveData();
-
         }
         SceneManager.LoadScene("Game_Scene");
     }
@@ -106,14 +104,14 @@ public class Main_Menu : MonoBehaviour
     public void Slot(int number)
     {
         DataManager.instance.nowSlot = number;
-
-        //저장 데이터 없을시
-        if (savefile[number])
+        player = GameObject.FindGameObjectWithTag("Player");
+        
+        if (savefile[number])     //저장 데이터 있을시
         {
             DataManager.instance.LoadData();
             LoadGameScene();
         }
-        else
+        else // 없을시
         {
             InputPanelOpen();
         }

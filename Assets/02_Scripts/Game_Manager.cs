@@ -15,10 +15,14 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1f; //게임을 항상 시작 상태로 설정
-        float LocX = float.Parse(DataManager.instance.nowPlayer.PlayerLocX);    // 게임시작시 좌표 받아와서 플레이어 이동시킴
-        float LocZ = float.Parse(DataManager.instance.nowPlayer.PlayerLocZ);
-        player.transform.position = new Vector3(LocX, 1.5f, LocZ);
+        //저장데이터가 있다면 플레이어를 저장위치로 이동
+        if(!(DataManager.instance.nowPlayer.playerPos.x == 0 && DataManager.instance.nowPlayer.playerPos.z == 0))
+        {
+            player.transform.position = DataManager.instance.nowPlayer.playerPos;
+        }
+
+        ResumeGame(); // 게임 플레이상태로 시작
+
     }
 
     void Update()
@@ -30,20 +34,20 @@ public class Game_Manager : MonoBehaviour
                 return;
             }
 
-            if (optionMenu.activeSelf) { 
-                PauseGame();
+            if (optionMenu.activeSelf) {
+                PauseResumeGame();
                 optionMenu.SetActive(false);
             }
             else
             {
-                PauseGame();
+                PauseResumeGame();
                 optionMenu.SetActive(true);
             }  
                 
         }
     }
-
-    public void PauseGame() //게임의 정지 여부를 관리
+   
+    public void PauseResumeGame() //게임의 정지 여부를 관리
     {
         isPause = !isPause;
         if (isPause)
@@ -56,6 +60,15 @@ public class Game_Manager : MonoBehaviour
         }
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
+    public void ResumeGame()
+    {
+        if(isPause == true)
+        {
+            Time.timeScale = 1f;
+
+        }
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+    }
 
     public void GameOffBtn() //게임 종료버튼 클릭시
     {
@@ -65,13 +78,13 @@ public class Game_Manager : MonoBehaviour
     public void OptionOn() //옵션 버튼 눌렀을 때 (켜기)
     {
         OptionBtn.SetActive(true);
-        PauseGame();
+        PauseResumeGame();
     }
 
     public void OptionOff() //옵션 버튼 다시 눌렀을 때 (끄기)
     {
         OptionBtn.SetActive(false);
-        PauseGame();
+        PauseResumeGame();
     }
 
     public void GameExitYes() //게임종료패널 Yes버튼
@@ -86,8 +99,7 @@ public class Game_Manager : MonoBehaviour
     
     public void SaveGame() //세이브 버튼 클릭 시
     {
-        DataManager.instance.nowPlayer.PlayerLocX = player.transform.position.x.ToString();
-        DataManager.instance.nowPlayer.PlayerLocZ = player.transform.position.z.ToString();
+        DataManager.instance.nowPlayer.playerPos = player.transform.position;
         DataManager.instance.SaveData();
     }
 }
