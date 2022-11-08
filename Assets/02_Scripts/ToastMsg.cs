@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class ToastMsg : MonoBehaviour
 {
-    private Text txt;
-    public float fadeInOutTime = 0.3f;
-    private static ToastMsg instance = null;
+    public TextMeshProUGUI toast;
+    float fadeInOutTime = 0.3f;
+    static ToastMsg instance = null;
 
-    public static ToastMsg Instrance
+    public static ToastMsg Instance
     {
         get
         {
@@ -18,29 +18,50 @@ public class ToastMsg : MonoBehaviour
         }
     }
 
-    private void Awake()
+    void Awake()
     {
         if (null == instance) instance = this;
     }
 
-    void Start()
+    struct TOAST
     {
-        txt = this.gameObject.GetComponent<Text>();
-        txt.enabled = false;
+        public string msg;
+        public float durationTime;
     }
+
+    Queue<TOAST> toastQueue = new Queue<TOAST>();
+    bool isPopUp;
 
     public void showMessage(string msg, float durationTime)
     {
-        StartCoroutine(showMessageCoroutine(msg, durationTime));
+        TOAST t;
+
+        t.msg = msg;
+        t.durationTime = durationTime;
+
+        toastQueue.Enqueue(t);
+        if (isPopUp == false) StartCoroutine(showToastQueue());
     }
 
-    private IEnumerator showMessageCoroutine(string msg, float durationTime)
+    IEnumerator showToastQueue()
     {
-        Color originalColor = txt.color;
-        txt.text = msg;
-        txt.enabled = true;
+        isPopUp = true;
 
-        yield return fadeInOut(txt, fadeInOutTime, true);
+        while (toastQueue.Count != 0)
+        {
+            TOAST t = toastQueue.Dequeue();
+            yield return StartCoroutine(showMessageCoroutine(t.msg, t.durationTime));
+        }
+
+        isPopUp = false;
+    }
+
+    IEnumerator showMessageCoroutine(string msg, float durationTime)
+    {
+        toast.text = msg;
+        toast.enabled = true;
+
+        yield return fadeInOut(toast, fadeInOutTime, true);
 
         float elapsedTime = 0.0f;
         while (elapsedTime < durationTime)
@@ -49,13 +70,12 @@ public class ToastMsg : MonoBehaviour
             yield return null;
         }
 
-        yield return fadeInOut(txt, fadeInOutTime, false);
+        yield return fadeInOut(toast, fadeInOutTime, false);
 
-        txt.enabled = false;
-        txt.color = originalColor;
+        toast.enabled = false;
     }
 
-    private IEnumerator fadeInOut(Text target, float durationTime, bool inOut)
+    IEnumerator fadeInOut(TextMeshProUGUI target, float durationTime, bool inOut)
     {
         float start, end;
         if (inOut)
@@ -77,8 +97,6 @@ public class ToastMsg : MonoBehaviour
             float alpha = Mathf.Lerp(start, end, elapsedTime / durationTime);
 
             target.color = new Color(current.r, current.g, current.b, alpha);
-
-            Debug.Log(target.color);
 
             elapsedTime += Time.deltaTime;
 
