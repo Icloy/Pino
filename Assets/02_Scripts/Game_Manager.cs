@@ -9,23 +9,32 @@ using UnityEditor.VersionControl;
 public class Game_Manager : MonoBehaviour
 {
     public GameObject GameExitPanel;
+    public GameObject GameOverPanel;
     public GameObject OptionBtn;
     public GameObject player;
     public GameObject optionMenu;
     public GameObject PausePanel;
-    public GameObject PauseBtn;
     bool isPause;
+
+    public static Game_Manager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        GameOverPanel.SetActive(false);
+
         //저장데이터가 있다면 플레이어를 저장위치로 이동
         if (!(DataManager.instance.nowPlayer.playerPos.x == 0 && DataManager.instance.nowPlayer.playerPos.z == 0))
         {
             player.transform.position = DataManager.instance.nowPlayer.playerPos;
         }
-
-        ResumeGame(); // 게임 플레이상태로 시작
-
+        
     }
 
     void Update()
@@ -51,8 +60,6 @@ public class Game_Manager : MonoBehaviour
         {
             pauseBtn(); //함수 실행
         }
-        
-
     }
    
     public void PauseResumeGame() //게임의 정지 여부를 관리
@@ -68,15 +75,6 @@ public class Game_Manager : MonoBehaviour
         }
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
-    public void ResumeGame()
-    {
-        if(isPause == true)
-        {
-            Time.timeScale = 1f;
-
-        }
-        Time.fixedDeltaTime = 0.02f * Time.timeScale;
-    }
 
     public void GameOffBtn() //게임 종료버튼 클릭시
     {
@@ -86,19 +84,18 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-    public void OptionOn() //옵션 버튼 눌렀을 때 (켜기)
+    public void Option() //옵션 버튼 눌렀을 때 (켜기)
     {
         if (!PausePanel.activeSelf)
         {
-            OptionBtn.SetActive(true);
-        }
-    }
-
-    public void OptionOff() //옵션 버튼 다시 눌렀을 때 (끄기)
-    {
-        if (!PausePanel.activeSelf)
-        {
-            OptionBtn.SetActive(false);
+            if (OptionBtn.activeSelf)
+            {
+                OptionBtn.SetActive(false);
+            }
+            else
+            {
+                OptionBtn.SetActive(true);
+            }
         }
     }
 
@@ -133,7 +130,24 @@ public class Game_Manager : MonoBehaviour
             return;
         }
         DataManager.instance.nowPlayer.playerPos = player.transform.position;
+        DataManager.instance.nowPlayer.MentalHp = Player_Health.instance.MentalCurrentHp;
+        DataManager.instance.nowPlayer.WaterHp = Player_Health.instance.WaterCurrentHp;
+        DataManager.instance.nowPlayer.HungryHp = Player_Health.instance.HungryCurrentHp;
         DataManager.instance.SaveData();
         ToastMsg.Instance.showMessage("저장되었습니다!", 1.0f);
     }
+
+    public void GameOver() //게임 오버처리
+    {
+        Time.timeScale = 0;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        GameOverPanel.SetActive(true);
+    }
+
+    public void GameOverBtn() //게임오버 버튼 클릭시
+    {
+        GameOverPanel.SetActive(false);
+        SceneManager.LoadScene("Main_Scene");
+    }
+
 }

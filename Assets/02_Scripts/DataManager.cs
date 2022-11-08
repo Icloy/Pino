@@ -7,9 +7,9 @@ using System.IO;
 public class PlayerData // 데이터를 저장할 클래스
 {
     public string UserName;
-    public int HungryHp;
-    public int WaterHp;
-    public int MentalHp;
+    public float HungryHp;
+    public float WaterHp;
+    public float MentalHp;
     public Vector3 playerPos;
     //public Vector3 playerRot; 
 }
