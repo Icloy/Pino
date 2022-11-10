@@ -133,6 +133,9 @@ public class Game_Manager : MonoBehaviour
         DataManager.instance.nowPlayer.MentalHp = Player_Health.instance.MentalCurrentHp;
         DataManager.instance.nowPlayer.WaterHp = Player_Health.instance.WaterCurrentHp;
         DataManager.instance.nowPlayer.HungryHp = Player_Health.instance.HungryCurrentHp;
+        DataManager.instance.nowPlayer.curTime = Game_Time.instance.curDayTime;
+        DataManager.instance.nowPlayer.Date = Game_Time.instance.date;
+
         DataManager.instance.SaveData();
         ToastMsg.Instance.showMessage("저장되었습니다!", 1.0f);
     }

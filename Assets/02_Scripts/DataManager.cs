@@ -6,11 +6,13 @@ using System.IO;
 
 public class PlayerData // 데이터를 저장할 클래스
 {
-    public string UserName;
-    public float HungryHp;
-    public float WaterHp;
-    public float MentalHp;
-    public Vector3 playerPos;
+    public string UserName; // 유저 이름
+    public float HungryHp = 100f; // 플레이어 hp
+    public float WaterHp = 100f; // 플레이어 hp
+    public float MentalHp = 100f; // 플레이어 hp
+    public Vector3 playerPos; // 플레이어 위치
+    public int Date = 1; // 게임 날자
+    public float curTime = 0f; //게임시간을 누적시킨값
     //public Vector3 playerRot; 
 }
 
@@ -46,7 +48,7 @@ public class DataManager : MonoBehaviour
 
     public void SaveData() //Json 형식으로 저장
     {
-        string data = JsonUtility.ToJson(nowPlayer); 
+        string data = JsonUtility.ToJson(nowPlayer, true); 
         File.WriteAllText(path + nowSlot.ToString(), data);
     }
 
