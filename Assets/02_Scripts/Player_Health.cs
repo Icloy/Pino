@@ -50,7 +50,7 @@ public class Player_Health : MonoBehaviour
         HungrySlider.value = HungryCurrentHp / HungryMaxHp;
 
         //hp가 0보다 아래로 내려가면
-        if (MentalCurrentHp <= 0)
+        if (MentalCurrentHp <= 0 || WaterCurrentHp <= 0 || HungryCurrentHp <= 0)
         {
             Game_Manager.instance.GameOver(); // 게임 오버처리
         }
@@ -58,29 +58,45 @@ public class Player_Health : MonoBehaviour
         timeSpan += Time.deltaTime;  // 경과 시간을 timeSpan에 누적
         if (timeSpan > dotTime)  // 경과 시간이 특정 시간이 보다 커졋을 경우 플레이어의 Hp를 감소시킨다.
         {
-            DigHp("Mental", 1);  
+            IncDegHp("Mental", -1);  
             timeSpan = 0; //timespan값을 초기화 시킨다.
         }
     }
 
-    public void DigHp(string HpName, float HpValue) //플레이어 체력 감소 처리
+    public void IncDegHp(string HpName, float HpValue) //플레이어 체력 가감 처리
     {
         switch (HpName)
         {
             case "Mental" :
-                MentalCurrentHp -= HpValue;
+                if(MentalCurrentHp + HpValue > MentalMaxHp) //체력 회복 값이 최대체력보다 크다면
+                {
+                    MentalCurrentHp = MentalMaxHp;
+                }
+                else
+                {
+                    MentalCurrentHp += HpValue;
+                }
                 break;
             case "Water":
-                WaterCurrentHp -= HpValue;
+                if (WaterCurrentHp + HpValue > WaterMaxHp) //체력 회복 값이 최대체력보다 크다면
+                {
+                    WaterCurrentHp = WaterMaxHp;
+                }
+                else
+                {
+                    WaterCurrentHp += HpValue;
+                }
                 break;
             case "Hungry":
-                HungryCurrentHp -= HpValue;
+                if (HungryCurrentHp + HpValue > HungryMaxHp) //체력 회복 값이 최대체력보다 크다면
+                {
+                    HungryCurrentHp = HungryMaxHp;
+                }
+                else
+                {
+                    HungryCurrentHp += HpValue;
+                }
                 break;
         }
-    }
-
-    public void IncHp()  //플레이어 체력 회복 처리
-    {
-
     }
 }
