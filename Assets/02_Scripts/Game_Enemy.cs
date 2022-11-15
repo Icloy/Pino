@@ -9,7 +9,7 @@ public class Game_Enemy : MonoBehaviour
     Vector3 originPos; //적의 초기좌표
 
     public float findDistance = 8f; //인식범위
-    public float attackDistance = 2f; //공격범위
+    public float attackDistance = 2.5f; //공격범위
     public float moveDistance = 20f; //적 이동 반경
     public float moveSpeed = 3f; //이동속도
     public float attackPower = 3f; //적의 공격 데미지
@@ -17,6 +17,8 @@ public class Game_Enemy : MonoBehaviour
     public float enemyMaxHp = 50f; //적의 최대 체력
     float attackcurTime = 0f;  //공격시간 누적 변수
     float attackDelay = 2f;  //공격 딜레이 시간
+
+    Animator anim;
 
     enum EnemyState
     {
@@ -38,6 +40,7 @@ public class Game_Enemy : MonoBehaviour
         cc = GetComponent<CharacterController>(); //캐릭터 컴포넌트 받아오기
         originPos = transform.position;
 
+        anim = transform.GetComponentInChildren<Animator>();  //자식으로부터 애니메이터 변수 받아오기
     }
 
     private void Update()
@@ -69,7 +72,8 @@ public class Game_Enemy : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.position) < findDistance)
         {
-            enemyState = EnemyState.Move;
+            enemyState = EnemyState.Move; //상대 전환
+            anim.SetTrigger("IdleToMove"); //이동 애니메이션으로 전환
         }
     }
 
@@ -83,10 +87,13 @@ public class Game_Enemy : MonoBehaviour
         {
             Vector3 dir = (player.position - transform.position).normalized; //방향설정
             cc.Move(dir * moveSpeed * Time.deltaTime); //이동
+
+            transform.forward = dir; //플레이어를 향해 방향을 전환한다.
         }
         else //공격범위 안이라면
         {
             enemyState = EnemyState.Attack; //적 공격 상태로 바꿈
+            anim.SetTrigger("MoveToAttackdelay");//공격 대기 애니메이션
         }
 
 
@@ -102,12 +109,14 @@ public class Game_Enemy : MonoBehaviour
                 Player_Health.instance.IncDegHp("Hungry", -attackPower); //데미지 처리문
                 print("공격");
                 attackcurTime = 0f; //시간 초기화
+                anim.SetTrigger("StartAttack"); //공격 애니메이션
             }
 
         }
         else //공격범위 밖이라면
         {
             enemyState = EnemyState.Move; //플레이어 재추격
+            anim.SetTrigger("AttackToMove"); //이동 애니메이션
             attackcurTime = 0f; //시간 초기화
         }
 
@@ -115,17 +124,20 @@ public class Game_Enemy : MonoBehaviour
 
     void Return()
     {
-        if (Vector3.Distance(transform.position,originPos) > 0.1f) //초기좌표와 이동값이 오차가 있다면
+        if (Vector3.Distance(transform.position,originPos) > 0.3f) //초기좌표와 이동값이 오차가 있다면
         {
             Vector3 dir = (originPos - transform.position).normalized; //방향설정
             cc.Move(dir * moveSpeed * Time.deltaTime); //이동
+
+            transform.forward = dir; //정면을 복귀방향을 향하도록 한다.
         }
         else
         {
-            originPos = transform.position; //
+            transform.position = originPos; 
             enemyHp = enemyMaxHp; //체력회복
             attackcurTime = attackDelay; //조우시에는 바로 공격하도록
             enemyState = EnemyState.Idle; //대기상태로 전환
+            anim.SetTrigger("MoveToIdle"); //대기 애니메이션으로 전환
         }
     }
     
@@ -140,12 +152,14 @@ public class Game_Enemy : MonoBehaviour
 
         if(enemyHp > 0)
         {
-            enemyState = EnemyState.Damaged;
+            enemyState = EnemyState.Damaged; // 상태 전환
+            anim.SetTrigger("Damaged"); //애니메이션 실행
             Damaged();
         }
         else
         {
-            enemyState = EnemyState.Die;
+            enemyState = EnemyState.Die; //상태 전환
+            anim.SetTrigger("Die"); //애니메이션 실행
             Die();
         }
     }

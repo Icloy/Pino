@@ -34,6 +34,7 @@ public class Game_Player : MonoBehaviour
         }
     }
 
+
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "Weapon")
