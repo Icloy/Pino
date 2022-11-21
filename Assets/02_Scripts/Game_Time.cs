@@ -37,6 +37,7 @@ public class Game_Time : MonoBehaviour
         if (curDayTime > goalDayTime)
         {
             date++; //날자 올림
+            Game_Score.instance.dayCnt++; // 점수용 변수도 같이 올림
             dateText.text = "Day " + date; // 텍스트 화면 출력
             curDayTime = 0; // 시간 누적값 초기화
         }

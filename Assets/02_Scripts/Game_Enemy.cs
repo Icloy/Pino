@@ -185,6 +185,7 @@ public class Game_Enemy : MonoBehaviour
 
     IEnumerator DieProcess()
     {
+        Game_Score.instance.killCnt++; //점수용 킬카운트 추가
         cc.enabled = false; //cc를 비활성화
         yield return new WaitForSeconds(1f); // 1초 대기후 자기자신 제거
         Destroy(gameObject);

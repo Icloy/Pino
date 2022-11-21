@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 using UnityEditor.VersionControl;
+using Unity.VisualScripting;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -119,7 +120,7 @@ public class Game_Manager : MonoBehaviour
         else   // 게임이 실행 중일 경우
         {
             PausePanel.SetActive(true);
-            PauseResumeGame();  //PausePanel을 불러오고 게임을 멈ㅊ춘다.
+            PauseResumeGame();  //PausePanel을 불러오고 게임을 멈춘다.
         }
     }
 
@@ -144,6 +145,7 @@ public class Game_Manager : MonoBehaviour
     {
         Time.timeScale = 0;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        Game_Score.instance.PrintScore();
         GameOverPanel.SetActive(true);
     }
 
