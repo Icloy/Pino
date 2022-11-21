@@ -58,7 +58,7 @@ public class Player_Health : MonoBehaviour
         timeSpan += Time.deltaTime;  // 경과 시간을 timeSpan에 누적
         if (timeSpan > dotTime)  // 경과 시간이 특정 시간이 보다 커졋을 경우 플레이어의 Hp를 감소시킨다.
         {
-            IncDegHp("Mental", -50);  
+            IncDegHp("Mental", -1);  
             timeSpan = 0; //timespan값을 초기화 시킨다.
         }
     }

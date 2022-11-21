@@ -29,6 +29,6 @@ public class Game_Score : MonoBehaviour // 최종 게임 점수를 환산하는 스코어 보드
     public void PrintScore() //점수 출력
     {
         totalScore = (killCnt * 1.2f) * (dayCnt * 1.2f); 
-        GameOverText.text = "Score : " + (int)totalScore;
+        GameOverText.text = "점수 : " + (int)totalScore;
     }
 }
