@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1607,7 +1607,6 @@ GameObject:
   - component: {fileID: 627325622}
   - component: {fileID: 627325621}
   - component: {fileID: 627325623}
-  - component: {fileID: 627325624}
   - component: {fileID: 627325625}
   - component: {fileID: 627325626}
   m_Layer: 0
@@ -1746,19 +1745,7 @@ MonoBehaviour:
   WaterMaxHp: 100
   WaterCurrentHp: 100
   HungryMaxHp: 100
-  HungryCurrentHp: 100
---- !u!114 &627325624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 627325616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71dbbdc3b225e7745a54e799814343c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  HungryCurrentHp: 50
 --- !u!114 &627325625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3313,8 +3300,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7009558549825717844, guid: dea84a3662be77b4bad1db42d2b32262, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dea84a3662be77b4bad1db42d2b32262, type: 3}
+--- !u!1 &1076747344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1596872523515200, guid: dea84a3662be77b4bad1db42d2b32262, type: 3}
+  m_PrefabInstance: {fileID: 1076747343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1076747345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076747344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9d3b6c672027141b1aa410126194e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
 --- !u!1 &1079290934
 GameObject:
   m_ObjectHideFlags: 0
