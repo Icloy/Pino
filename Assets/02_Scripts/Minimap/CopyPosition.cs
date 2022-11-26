@@ -18,7 +18,7 @@ public class CopyPosition : MonoBehaviour
 
         transform.position = new Vector3(
             (x ? target.position.x : target.position.x),
-            (y ? target.position.y : target.position.y),
+            100,
             (z ? target.position.z : target.position.z));
     }
 }
