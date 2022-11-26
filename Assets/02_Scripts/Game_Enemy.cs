@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Game_Enemy : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Game_Enemy : MonoBehaviour
     float attackDelay = 2f;  //공격 딜레이 시간
 
     Animator anim;
+    NavMeshAgent chom;
+
 
     enum EnemyState
     {
@@ -40,6 +43,7 @@ public class Game_Enemy : MonoBehaviour
         cc = GetComponent<CharacterController>(); //캐릭터 컴포넌트 받아오기
         originPos = transform.position;
 
+        chom = GetComponent<NavMeshAgent>();
         anim = transform.GetComponentInChildren<Animator>();  //자식으로부터 애니메이터 변수 받아오기
     }
 
@@ -85,10 +89,11 @@ public class Game_Enemy : MonoBehaviour
         }
         else if (Vector3.Distance(transform.position, player.position) > attackDistance) //공격범위 밖이라면
         {
-            Vector3 dir = (player.position - transform.position).normalized; //방향설정
-            cc.Move(dir * moveSpeed * Time.deltaTime); //이동
-
-            transform.forward = dir; //플레이어를 향해 방향을 전환한다.
+            chom.isStopped = true;
+            chom.ResetPath();
+            chom.stoppingDistance = attackDistance; // 내비로 접근 최소 거리 설정
+            chom.destination = player.position; //내비 목적지 설정
+            
         }
         else //공격범위 안이라면
         {

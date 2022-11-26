@@ -23,6 +23,8 @@ public class Player_Health : MonoBehaviour
     public float HungryMaxHp;
     public float HungryCurrentHp;
 
+    public bool isDead = false;
+
 
     public static Player_Health instance;
 
@@ -52,6 +54,7 @@ public class Player_Health : MonoBehaviour
         //hp가 0보다 아래로 내려가면
         if (MentalCurrentHp <= 0 || WaterCurrentHp <= 0 || HungryCurrentHp <= 0)
         {
+            isDead = true;
             Game_Manager.instance.GameOver(); // 게임 오버처리
         }
 
