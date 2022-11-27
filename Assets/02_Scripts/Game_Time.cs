@@ -13,8 +13,6 @@ public class Game_Time : MonoBehaviour
     public float goalDayTime; // 날자 변환의 목표 초
     public float curDayTime; // 현재 시간을 누적시킬 변수
 
-    private int wave = 1;
-
     public static Game_Time instance;
 
     private void Awake()
@@ -40,21 +38,14 @@ public class Game_Time : MonoBehaviour
         if (curDayTime > goalDayTime)
         {
             date++; //날자 올림
-            if (date % 3 == 0)
+            if(date % 3 == 0)
             {
-                spawnEnemy();
+                Game_SpawnEnemy.instance.CreateEnemy();
             }
             Game_Score.instance.dayCnt++; // 점수용 변수도 같이 올림
             dateText.text = "Day " + date; // 텍스트 화면 출력
             curDayTime = 0f; // 시간 누적값 초기화
         }
     }
-
-    void spawnEnemy()
-    {
-        for (int i = 1; i >= wave; i++)
-        {
-            Game_SpawnEnemy.instance.CreateEnemy();
-        }
-    }
 }
+
