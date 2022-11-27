@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Axe : InventoryItemBase
+public class Mush : InventoryItemBase 
 {
     public override string Name
     {
