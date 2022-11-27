@@ -16,6 +16,7 @@ public class ItemDropHandler : MonoBehaviour, IDropHandler //아이템 드롭, 떨구기
             if(item != null)
             {
                 _Inventory.RemovedItem(item);
+                item.Ondrop();
             }
             
         }

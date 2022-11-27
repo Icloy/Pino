@@ -9,15 +9,73 @@ public class PlayerController : MonoBehaviour
 
     public GameObject Hand;
 
+    public HUD Hud;
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private IInventoryItem mCurrentItem = null;
+
+    private bool mLockPickup = false;
+
+    /*private void DropCurrentItem()
     {
-        IInventoryItem item = hit.collider.GetComponent<IInventoryItem>();
+
+        mLockPickup = true;
+        GameObject goItem = (mCurrentItem as MonoBehaviour).gameObject;
+
+        inventory.RemovedItem(mCurrentItem);
+
+        Rigidbody rbItem = goItem.AddComponent<Rigidbody>();
+        rbItem.AddForce(transform.forward * 2.0f, ForceMode.Impulse);
+
+        Invoke("DoDropItem", 0.25f);
+    }
+
+    public void DoDropItem()
+    {
+        mLockPickup = false;
+
+        Destroy((mCurrentItem as MonoBehaviour).GetComponent<Rigidbody>());
+
+        mCurrentItem = null;
+    }
+
+    private void FixedUpdate()
+    {
+        if(mCurrentItem != null && Input.GetKeyDown(KeyCode.R))
+        {
+            DropCurrentItem();
+        }
+    }*/ //키 누를시 드롭 
+
+
+    private IInventoryItem mItemToPickup = null;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        IInventoryItem item = other.GetComponent<IInventoryItem>();
         if (item != null)
         {
-            inventory.AddItem(item);
+            if (mLockPickup)
+                return;
+            mItemToPickup = item;
+            //inventory.AddItem(item);
+            //item.OnPickup();
+            Hud.OpenMessagePanel("");
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        IInventoryItem item = other.GetComponent<IInventoryItem>();
+        if (item != null)
+        {
+            Hud.CloseMessagePanel();
+            mItemToPickup = null;
+        }
+
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,14 +101,19 @@ public class PlayerController : MonoBehaviour
         goItem.SetActive(true);
 
         goItem.transform.parent = Hand.transform;
-        goItem.transform.localPosition = (item as InventoryItemBase).PickPosition;
-        goItem.transform.localEulerAngles = (item as InventoryItemBase).PickRotation;
+
+        mCurrentItem = e.Item;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(mItemToPickup != null && Input.GetKeyDown(KeyCode.F))
+        {
+            inventory.AddItem(mItemToPickup);
+            mItemToPickup.OnPickup();
+            Hud.CloseMessagePanel();
+        }
     }
 }

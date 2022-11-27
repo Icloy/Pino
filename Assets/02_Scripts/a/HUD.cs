@@ -7,6 +7,8 @@ public class HUD : MonoBehaviour
 {
     public Inventory Inventory;
 
+    public GameObject MessagePanel;
+
     void Start()
     {
         Inventory.ItemAdded += InventoryScript_ItemAdded;
@@ -54,5 +56,15 @@ public class HUD : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void OpenMessagePanel(string text)
+    {
+        MessagePanel.SetActive(true);
+    }
+
+    public void CloseMessagePanel()
+    {
+        MessagePanel.SetActive(false);
     }
 }
