@@ -12,6 +12,7 @@ public class Game_EnemyChomper : MonoBehaviour
     public ParticleSystem hitEffect; //피격 시 재생할 파티클 효과
     public AudioClip deathSound; //사망시 재생할 오디오 소스
     public AudioClip hitSound; //피격시 재생할 오디오 소스
+    public AudioClip attackSound; //피격시 재생할 오디오 소스
 
     private Animator enemyAnimator; //애니메이터 컴포넌트
     private AudioSource enemyAudioPlayer; //오디오 소스 컴포넌트
@@ -20,7 +21,7 @@ public class Game_EnemyChomper : MonoBehaviour
     public float damage = 2f; //공격력
     public float curHealth = 20f; //현재체력
     public float maxHealth = 20f; //최대체력
-    public float attackDistance = 2.0f; //공격사거리
+    public float attackDistance = 4.0f; //공격사거리
     public float timeBetAttack = 1f; //공격 간격
     private float lastAttackTime; //마지막 공격 시점
 
@@ -85,7 +86,11 @@ public class Game_EnemyChomper : MonoBehaviour
 
     void Idle() //대기 상태
     {
-        //플레이어가가 살아있다면 쫒는다.
+        if (Vector3.Distance(transform.position, player.position) < attackDistance)  //공격범위 안이라면
+        {
+            anim.SetTrigger("IdleToAttack");
+            chomperState = ChomperState.Attack;
+        }
         if (!Player_Health.instance.isDead)
         {
             chomperState = ChomperState.Move;
@@ -111,6 +116,11 @@ public class Game_EnemyChomper : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
     void Attack() //공격
     {
         if (Vector3.Distance(transform.position, player.position) < attackDistance)  //공격범위 안이라면
@@ -118,17 +128,21 @@ public class Game_EnemyChomper : MonoBehaviour
             lastAttackTime += Time.deltaTime; //변수에 시간누적
             if (lastAttackTime > timeBetAttack) // 시간이 되었다면
             {
+                transform.LookAt(player); //플레이어를 바라보고
                 anim.SetTrigger("MoveToAttack"); //공격 애니메이션
+                enemyAudioPlayer.PlayOneShot(attackSound); //공격 소리 재생
                 Player_Health.instance.IncDegHp("Hungry", -damage); //데미지 처리문
                 print("공격");
                 lastAttackTime = 0f; //시간 초기화
+                anim.SetTrigger("AttackToIdle");
+                chomperState = ChomperState.Idle;
             }
 
         }
         else //공격범위 밖이라면
         {
             //플레이어 재추격
-            anim.SetTrigger("AttackToIdle"); //공격 애니메이션
+            anim.SetTrigger("AttackToIdle"); 
             chomperState = ChomperState.Idle;
         }
 
@@ -153,6 +167,7 @@ public class Game_EnemyChomper : MonoBehaviour
             return; //이미 피격되고있거나 사망 상태일경우 함수를 종료한다.
         }
 
+        enemyAudioPlayer.PlayOneShot(hitSound); //피격 소리 재생
         curHealth -= hitPower; //적 데미지처리
 
         if (curHealth > 0)
@@ -178,6 +193,7 @@ public class Game_EnemyChomper : MonoBehaviour
     IEnumerator DieProcess()
     {
         isdead = true;
+        enemyAudioPlayer.PlayOneShot(deathSound); //사망 소리 재생
         Game_Score.instance.killCnt++; //점수용 킬카운트 추가
         yield return new WaitForSeconds(1f); // 1초 대기후 자기자신 제거
         Destroy(gameObject);
