@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
     private IInventoryItem mItemToPickup = null;
 
+
     private void OnTriggerEnter(Collider other)
     {
         
@@ -60,7 +61,9 @@ public class PlayerController : MonoBehaviour
             mItemToPickup = item;
             //inventory.AddItem(item);
             //item.OnPickup();
-            Hud.OpenMessagePanel("");
+            //Hud.OpenMessagePanel("");
+            MiddleToastMsg.Instance.showMessage("È¹µæ FÅ°", 1.5f);
+
         }
     }
 
@@ -69,12 +72,27 @@ public class PlayerController : MonoBehaviour
         IInventoryItem item = other.GetComponent<IInventoryItem>();
         if (item != null)
         {
-            Hud.CloseMessagePanel();
+            //Hud.CloseMessagePanel();
             mItemToPickup = null;
         }
 
 
     }
+    /*private void OnTriggerStay(Collider other)
+    {
+        IInventoryItem item = other.GetComponent<IInventoryItem>();
+        if (item != null)
+        {
+            if (mLockPickup)
+                return;
+            mItemToPickup = item;
+            //inventory.AddItem(item);
+            //item.OnPickup();
+            MiddleToastMsg.Instance.showMessage("ÀúÀåµÇ¾ú½À´Ï´Ù!", 0.5f);
+
+        }
+
+    }*/
 
     // Start is called before the first frame update
     void Start()

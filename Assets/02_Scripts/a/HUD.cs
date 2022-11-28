@@ -9,6 +9,8 @@ public class HUD : MonoBehaviour
 
     public GameObject MessagePanel;
 
+    public static HUD instance;
+
     void Start()
     {
         Inventory.ItemAdded += InventoryScript_ItemAdded;
@@ -67,4 +69,6 @@ public class HUD : MonoBehaviour
     {
         MessagePanel.SetActive(false);
     }
+
+   
 }

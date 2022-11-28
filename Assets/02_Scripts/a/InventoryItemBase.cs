@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryItemBase : MonoBehaviour, IInventoryItem //아이템의 기본이 되는 스크립트
                                                                //아이템마다 설정없이 MonoBehaviour대신 InventoryItemBase갖다 쓰면 됨
@@ -33,6 +34,14 @@ public class InventoryItemBase : MonoBehaviour, IInventoryItem //아이템의 기본이
         transform.localPosition = PickPosition;
         transform.localEulerAngles = PickRotation;
     }
+
+    public virtual void OnUseup()
+    {
+        gameObject.SetActive(false);
+    }
+
+
+
 
     public virtual void Ondrop()
     {
