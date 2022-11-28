@@ -11,6 +11,7 @@ public class Game_Manager : MonoBehaviour
 {
     public GameObject GameExitPanel;
     public GameObject GameOverPanel;
+    public GameObject GameSoundPanel;
     public GameObject OptionBtn;
     public GameObject player;
     public GameObject optionMenu;
@@ -124,6 +125,22 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
+    public void soundBtn()
+    {
+        if (!PausePanel.activeSelf)
+        {
+            if (!GameSoundPanel.activeSelf)
+            {
+                GameSoundPanel.SetActive(true);
+                PauseResumeGame();
+            }
+            else
+            {
+                GameSoundPanel.SetActive(false);
+                PauseResumeGame();
+            }
+        }
+    }
     public void SaveGame() //세이브 버튼 클릭 시
     {
         if (isPause == true)
