@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
         {
             inventory.AddItem(mItemToPickup);
             mItemToPickup.OnPickup();
-            Hud.CloseMessagePanel();
+            //Hud.CloseMessagePanel();
         }
     }
 }

@@ -15,5 +15,9 @@ public class HealPack : InventoryItemBase
 
         Player_Health.instance.IncDegHp("Hungry", HealthPoints);
 
+        _Inventory.RemovedItemm(this);
+
+        Destroy(this.gameObject);
+
     }
 }
