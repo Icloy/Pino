@@ -7,7 +7,7 @@ public class HUD : MonoBehaviour
 {
     public Inventory Inventory;
 
-    public GameObject MessagePanel;
+    //public GameObject MessagePanel;
 
     public static HUD instance;
 
@@ -60,7 +60,7 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void OpenMessagePanel(string text)
+    /*public void OpenMessagePanel(string text)
     {
         MessagePanel.SetActive(true);
     }
@@ -68,7 +68,7 @@ public class HUD : MonoBehaviour
     public void CloseMessagePanel()
     {
         MessagePanel.SetActive(false);
-    }
+    }*/
 
    
 }
