@@ -18,7 +18,7 @@ public class Gum : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Enemy"))
         {
             GD = _Damage;
         }
