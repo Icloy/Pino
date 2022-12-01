@@ -49,9 +49,8 @@ public class InventoryItemBase : MonoBehaviour, IInventoryItem //아이템의 기본이
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, 1000))
         {
-            gameObject.SetActive(true);
-            gameObject.transform.position = hit.point;
-            gameObject.transform.eulerAngles = DropRotation;
+            gameObject.SetActive(false);
+            Destroy(this);
         }
     }
 

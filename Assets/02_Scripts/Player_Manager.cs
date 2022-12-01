@@ -15,6 +15,9 @@ public class Player_Manager : MonoBehaviour
 
     Animator anim;
 
+    [SerializeField]
+    private GameObject AttackBox;
+
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -37,5 +40,39 @@ public class Player_Manager : MonoBehaviour
         anim.SetBool("IdleToMove", moveVec != Vector3.zero);
 
         transform.LookAt(transform.position + moveVec);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attack();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ComboAttack();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            speed = 50;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            speed = 6;
+        }
     }
+
+    public void Attack()
+    {
+        anim.SetTrigger("Attack");
+    }
+
+    public void ComboAttack()
+    {
+        anim.SetTrigger("ComboAttack");
+    }
+
+    public void OnAttackBox()
+    {
+        AttackBox.SetActive(true);
+    }
+    
 }
