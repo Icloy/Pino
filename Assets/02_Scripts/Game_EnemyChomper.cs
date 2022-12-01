@@ -188,6 +188,7 @@ public class Game_EnemyChomper : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); //피격 모션 시간만큼 대기
         chomperState = ChomperState.Move; //이동상태로 전환
+        anim.SetTrigger("DamagedToMove");
     }
 
     IEnumerator DieProcess()
