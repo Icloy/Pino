@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
             Collider collider = (item as MonoBehaviour).GetComponent<Collider>();
             if (collider.enabled)
             {
-                collider.enabled = true;
+                collider.enabled = false;
 
                 mItems.Add(item);
 
