@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Attack : MonoBehaviour
-{
-   
+{ 
     private void OnEnable()
     {
         StartCoroutine("AutoDisable");
@@ -14,7 +12,7 @@ public class Player_Attack : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Game_EnemyChomper>().HitEnemy(Gum.instance.GD);
+            other.GetComponent<Game_EnemyChomper>().HitEnemy(Weapon.instance.attackDmg);
         }
     }
 

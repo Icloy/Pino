@@ -179,7 +179,7 @@ public class Game_EnemyChomper : MonoBehaviour
         else
         {
             chomperState = ChomperState.Die; //상태 전환
-            anim.SetTrigger("Die"); //애니메이션 실행
+            anim.SetTrigger("DamagedToDie"); //애니메이션 실행
             Die();
         }
     }

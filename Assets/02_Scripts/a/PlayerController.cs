@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private bool mLockPickup = false;
 
+
     /*private void DropCurrentItem()
     {
 
@@ -119,9 +120,8 @@ public class PlayerController : MonoBehaviour
         goItem.SetActive(true);
 
         goItem.transform.parent = Hand.transform;
-
+        
         mCurrentItem = e.Item;
-
     }
 
     // Update is called once per frame
