@@ -57,6 +57,5 @@ public class InventoryItemBase : MonoBehaviour, IInventoryItem //아이템의 기본이
     public Vector3 PickPosition; //무기를 들었을때 위치와 회전도를 정의
     public Vector3 PickRotation;
     public Vector3 DropRotation;
-
     
 }
