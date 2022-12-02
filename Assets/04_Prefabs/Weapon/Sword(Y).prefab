@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3688104870547298267}
   - component: {fileID: 6541053103571286821}
   - component: {fileID: 38904285906745702}
+  - component: {fileID: 7246518467427091811}
   m_Layer: 0
   m_Name: Sword(Y)
   m_TagString: Weapon
@@ -4909,3 +4910,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dmg: 20
+  attackDmg: 0
+  equip: 0
+--- !u!136 &7246518467427091811
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147684410858556716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.19587103
+  m_Height: 1.4156287
+  m_Direction: 1
+  m_Center: {x: -0.00000014901161, y: 0.50358963, z: -0.000000039115548}
