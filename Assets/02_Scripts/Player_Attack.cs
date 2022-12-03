@@ -2,7 +2,17 @@ using System.Collections;
 using UnityEngine;
 
 public class Player_Attack : MonoBehaviour
-{ 
+{
+    public float attackDmg = 0;
+    public bool equip = false;
+
+    public static Player_Attack instance;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
     private void OnEnable()
     {
         StartCoroutine("AutoDisable");
@@ -12,7 +22,7 @@ public class Player_Attack : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Game_EnemyChomper>().HitEnemy(Weapon.instance.attackDmg);
+            other.GetComponent<Game_EnemyChomper>().HitEnemy(attackDmg);
         }
     }
 

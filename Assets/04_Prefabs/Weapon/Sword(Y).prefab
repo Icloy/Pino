@@ -4821,7 +4821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8bd31426af6ef4eb772ed4af57ab89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Image: {fileID: 21300000, guid: 5aa0d71d789c93a468898d8acfcf2a09, type: 3}
+  _Image: {fileID: 21300000, guid: 4c4eb588718033b478bd7babb392366a, type: 3}
   PickPosition: {x: 0, y: 0, z: 0}
   PickRotation: {x: 80, y: -25, z: -10}
   DropRotation: {x: 0, y: 0, z: 0}

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7346469341614173433}
   - component: {fileID: 3688104870547298266}
   - component: {fileID: 1085972558971315800}
-  - component: {fileID: 3688104870547298268}
   - component: {fileID: 3688104870547298267}
   - component: {fileID: 6541053103571286821}
   - component: {fileID: 3311146422486640139}
+  - component: {fileID: 2989149676229160413}
   m_Layer: 0
   m_Name: Sword(G)
   m_TagString: Weapon
@@ -4809,20 +4809,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &3688104870547298268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9147684410858556716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60107f9b9810d0441914dc17ed0a82cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Damage: 5
-  GD: 0
 --- !u!114 &3688104870547298267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4835,7 +4821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8bd31426af6ef4eb772ed4af57ab89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Image: {fileID: 21300000, guid: 5aa0d71d789c93a468898d8acfcf2a09, type: 3}
+  _Image: {fileID: 21300000, guid: d71ffd9433339a74ba7ff273c7d338b0, type: 3}
   PickPosition: {x: 0, y: 0, z: 0}
   PickRotation: {x: 80, y: -25, z: -10}
   DropRotation: {x: 0, y: 0, z: 0}
@@ -4925,3 +4911,18 @@ CapsuleCollider:
   m_Height: 1.4156287
   m_Direction: 1
   m_Center: {x: -0.00000014901161, y: 0.50358963, z: -0.000000039115548}
+--- !u!114 &2989149676229160413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147684410858556716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eafea9f98684e04c959bf5ca1a102ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dmg: 5
+  attackDmg: 0
+  equip: 0

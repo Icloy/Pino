@@ -5,8 +5,6 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public float Dmg;
-    public float attackDmg = 0;
-    public bool equip = false;
 
     public static Weapon instance;
 
@@ -19,14 +17,14 @@ public class Weapon : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            equip = true;
-            attackDmg = Dmg;
+            Player_Attack.instance.equip = true;
+            Player_Attack.instance.attackDmg = Dmg;
         }    
     }
 
     private void OnDisable() //오브젝트가 꺼질때 
     {
-        attackDmg = 0;      
-        equip = false;
+        Player_Attack.instance.attackDmg = 0;
+        Player_Attack.instance.equip = false;
     }
 }
