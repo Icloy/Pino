@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool mLockPickup = false;
 
     private bool one = true;
+
     /*private void DropCurrentItem()
     {
 
@@ -63,11 +64,12 @@ public class PlayerController : MonoBehaviour
             //inventory.AddItem(item);
             //item.OnPickup();
             //Hud.OpenMessagePanel("");
-            if(one)
+            if (one)
             {
                 MiddleToastMsg.Instance.showMessage("È¹µæ FÅ°", 1f);
                 one = false;
             }
+
         }
     }
 

@@ -32,7 +32,4 @@ public class Player_Attack : MonoBehaviour
 
         gameObject.SetActive(false);
     }
-
-
-
 }

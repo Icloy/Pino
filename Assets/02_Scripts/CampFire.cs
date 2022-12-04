@@ -9,10 +9,10 @@ public class CampFire : MonoBehaviour
     float maxtime = 10;
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             curtime += Time.deltaTime;
-            if(curtime >= maxtime)
+            if (curtime >= maxtime)
             {
                 Player_Health.instance.IncDegHp("Mental", 1);
                 curtime = 0;
@@ -24,5 +24,4 @@ public class CampFire : MonoBehaviour
     {
         curtime = 0;
     }
-
 }
