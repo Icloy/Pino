@@ -13,6 +13,7 @@ public class PlayerData // 데이터를 저장할 클래스
     public Vector3 playerPos; // 플레이어 위치
     public int Date = 1; // 게임 날자
     public float curTime = 0f; //게임시간을 누적시킨값
+    public Vector3 []chomPos;
     //public Vector3 playerRot; 
 }
 

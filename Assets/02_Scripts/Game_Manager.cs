@@ -36,6 +36,13 @@ public class Game_Manager : MonoBehaviour
         {
             player.transform.position = DataManager.instance.nowPlayer.playerPos;
         }
+        if (DataManager.instance.nowPlayer.chomPos.Length != 0) //필드에 촘퍼 저장값이있다면.
+        {
+            for (int i = 0; i < DataManager.instance.nowPlayer.chomPos.Length; i++) //wave의 수만큼 반복문 실행
+            {
+                Instantiate(Game_SpawnEnemy.instance.Enemy, DataManager.instance.nowPlayer.chomPos[i], Quaternion.identity); //생성
+            }
+        }
         
     }
 
@@ -153,7 +160,13 @@ public class Game_Manager : MonoBehaviour
         DataManager.instance.nowPlayer.HungryHp = Player_Health.instance.HungryCurrentHp;
         DataManager.instance.nowPlayer.curTime = Game_Time.instance.curDayTime;
         DataManager.instance.nowPlayer.Date = Game_Time.instance.date;
-
+        GameObject [] chompPos = GameObject.FindGameObjectsWithTag("Enemy");
+        DataManager.instance.nowPlayer.chomPos = new Vector3[chompPos.Length];
+        for (int i = 0; i < chompPos.Length; i++)
+        {
+            print(chompPos[i].transform.position);
+            DataManager.instance.nowPlayer.chomPos[i] = chompPos[i].transform.position;
+        }
         DataManager.instance.SaveData();
         ToastMsg.Instance.showMessage("저장되었습니다!", 1.0f);
     }

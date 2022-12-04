@@ -57,6 +57,9 @@ public class Game_EnemyChomper : MonoBehaviour
 
         chom = GetComponent<NavMeshAgent>();
         anim = transform.GetComponentInChildren<Animator>();  //자식으로부터 애니메이터 변수 받아오기
+
+        chom.destination = player.position; //내비 목적지 설정
+        chomperState = ChomperState.Move;
     }
 
     private void Update()
@@ -196,7 +199,7 @@ public class Game_EnemyChomper : MonoBehaviour
         isdead = true;
         enemyAudioPlayer.PlayOneShot(deathSound); //사망 소리 재생
         Game_Score.instance.killCnt++; //점수용 킬카운트 추가
-        yield return new WaitForSeconds(1f); // 1초 대기후 자기자신 제거
+        yield return new WaitForSeconds(0.5f); // n초 대기후 자기자신 제거
         Destroy(gameObject);
     }
 }
