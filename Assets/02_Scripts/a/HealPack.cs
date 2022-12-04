@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 
 public class HealPack : InventoryItemBase
 {
-    public int HealthPoints = 20;
+    public int HealthPoints;
+    public int WaterPoints;
+    public int MentalPoints;
 
     public Inventory _Inventory;
 
@@ -14,6 +16,8 @@ public class HealPack : InventoryItemBase
     {
 
         Player_Health.instance.IncDegHp("Hungry", HealthPoints);
+        Player_Health.instance.IncDegHp("Water", WaterPoints);
+        Player_Health.instance.IncDegHp("Mental", MentalPoints);
 
         _Inventory.RemovedItemm(this);
 

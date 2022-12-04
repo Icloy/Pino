@@ -19,6 +19,7 @@ public class Game_Manager : MonoBehaviour
     bool isPause;
 
     public static Game_Manager instance;
+    
 
     private void Awake()
     {
@@ -172,4 +173,8 @@ public class Game_Manager : MonoBehaviour
         SceneManager.LoadScene("Main_Scene");
     }
 
+    public static implicit operator Game_Manager(ItemInfo v)
+    {
+        throw new NotImplementedException();
+    }
 }
