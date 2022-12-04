@@ -202,7 +202,7 @@ public class Game_EnemyChomper : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // n초 대기후 자기자신 제거
         Destroy(gameObject);
     }
-
+    /*
     IEnumerator DropItem()
     {
         int rand = Random.Range(0, 10);
@@ -230,5 +230,6 @@ public class Game_EnemyChomper : MonoBehaviour
 
 
     }
+    */
 
 }

@@ -185,9 +185,10 @@ public class Game_Manager : MonoBehaviour
         GameOverPanel.SetActive(false);
         SceneManager.LoadScene("Main_Scene");
     }
-
+    /*
     public static implicit operator Game_Manager(ItemInfo v)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
+    */
 }

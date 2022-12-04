@@ -18,9 +18,10 @@ public class ItemInfo : MonoBehaviour
     public GameObject obj6;
 
     public static Game_Manager instance;
+    /*
     private void Awake()
     {
         instance = this;
     }
-
+    */
 }
