@@ -73,13 +73,13 @@ public class Box : MonoBehaviour
 
     void RandomSel()
     {
-        int r = Random.Range(0, 2);
+        int r = Random.Range(0, 3);
         ItemInfo.instance.dropItem(r, this.transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "AttackBox")
         {
             if (curHealth > 0)
             {

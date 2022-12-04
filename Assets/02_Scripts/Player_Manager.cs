@@ -50,16 +50,28 @@ public class Player_Manager : MonoBehaviour
         {
             ComboAttack();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
-            speed = 50;
+            if(Player_Health.instance.WaterCurrentHp > 10)
+            {
+                speed = 12;
+                curTime += Time.deltaTime;
+                if (curTime > maxTime)
+                {
+                    Player_Health.instance.WaterCurrentHp -= 5;
+                    curTime = 0;
+                }
+                
+            }
+            
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
             speed = 6;
         }
     }
-
+    private float curTime = 0f;
+    private float maxTime = 3f;
     public void Attack()
     {
         anim.SetTrigger("Attack");
