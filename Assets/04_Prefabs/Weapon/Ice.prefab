@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireDamage: 10
-  fireSpeed: 0.08
+  fireSpeed: 0.03
 --- !u!1001 &856068209211955287
 PrefabInstance:
   m_ObjectHideFlags: 0
