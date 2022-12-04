@@ -30,7 +30,7 @@ public class UIMinimap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        minimapCamera.orthographicSize = 15;
     }
 
     // Update is called once per frame
