@@ -35,7 +35,6 @@ public class Game_EnemyChomper : MonoBehaviour
         pathFinder = GetComponent<NavMeshAgent>();
         enemyAnimator = GetComponent<Animator>();
         enemyAudioPlayer = GetComponent<AudioSource>();
-
         enemyRenderer = GetComponentInChildren<Renderer>();
         isdead = false;
     }
@@ -200,36 +199,13 @@ public class Game_EnemyChomper : MonoBehaviour
         enemyAudioPlayer.PlayOneShot(deathSound); //사망 소리 재생
         Game_Score.instance.killCnt++; //점수용 킬카운트 추가
         yield return new WaitForSeconds(0.5f); // n초 대기후 자기자신 제거
+        RandomSel();
         Destroy(gameObject);
     }
-    /*
-    IEnumerator DropItem()
+
+    void RandomSel()
     {
-        int rand = Random.Range(0, 10);
-        if (!isdead)
-        {
-            switch (rand)
-            {
-                case 1:
-                    transform.localPosition = this.transform.localPosition;
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-
-                    break;
-                case 5:
-
-                    break;
-            }
-        }
-
-
+        int r = Random.Range(0, 10);
+        ItemInfo.instance.dropItem(r, this.transform.position);
     }
-    */
-
 }

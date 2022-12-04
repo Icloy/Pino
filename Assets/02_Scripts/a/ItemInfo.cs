@@ -5,11 +5,11 @@ using System;
 
 public class ItemInfo : MonoBehaviour
 {
-    public GameObject obj1;
-    
-    public GameObject obj2;
+    public GameObject ManaPosion;
 
-    public GameObject obj3;
+    public GameObject EnduPosion;
+
+    public GameObject HealthPosion;
 
     public GameObject obj4;
 
@@ -17,11 +17,27 @@ public class ItemInfo : MonoBehaviour
 
     public GameObject obj6;
 
-    public static Game_Manager instance;
-    /*
+    public static ItemInfo instance;
+
     private void Awake()
     {
         instance = this;
     }
-    */
+    public void dropItem(int r, Vector3 trans)
+    {
+        switch (r)
+        {
+            case 0:
+                Instantiate(ManaPosion, trans, Quaternion.identity); //持失
+                break;
+            case 1:
+                Instantiate(EnduPosion, trans, Quaternion.identity); //持失
+                break;
+            case 2:
+                Instantiate(HealthPosion, trans, Quaternion.identity); //持失
+                break;
+            default:
+                break;
+        }
+    }
 }
