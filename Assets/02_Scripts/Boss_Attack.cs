@@ -10,7 +10,7 @@ public class Boss_Attack : MonoBehaviour
     public float fireSpeed;
 
     private float curTime = 0f;
-    private float maxTime = 7f;
+    private float maxTime = 5f;
 
     private void Awake()
     {

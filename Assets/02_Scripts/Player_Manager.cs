@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player_Manager : MonoBehaviour
 {
+    
+
     public float speed;
     float hAxis;
     float vAxis;
@@ -18,6 +20,9 @@ public class Player_Manager : MonoBehaviour
     [SerializeField]
     private GameObject AttackBox;
 
+    
+
+
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -25,6 +30,8 @@ public class Player_Manager : MonoBehaviour
     void Start()
     {
         cc = GetComponent<CharacterController>(); //캐릭터 컴포넌트 받아오기
+        
+
     }
 
 
@@ -75,6 +82,7 @@ public class Player_Manager : MonoBehaviour
     public void Attack()
     {
         anim.SetTrigger("Attack");
+
     }
 
     public void ComboAttack()
