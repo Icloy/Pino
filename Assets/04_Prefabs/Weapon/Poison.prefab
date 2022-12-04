@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireDamage: 10
-  fireSpeed: 0.05
+  fireSpeed: 0.02
 --- !u!135 &8517767561261740516
 SphereCollider:
   m_ObjectHideFlags: 0
