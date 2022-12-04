@@ -12,6 +12,10 @@ public class HealPack : InventoryItemBase
 
     public Inventory _Inventory;
 
+    private void Awake()
+    {
+        _Inventory = Inventory.FindObjectOfType<Inventory>();
+    }
     public override void OnUse()
     {
 
