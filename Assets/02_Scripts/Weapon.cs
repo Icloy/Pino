@@ -19,7 +19,7 @@ public class Weapon : MonoBehaviour
         {
             Player_Attack.instance.equip = true;
             Player_Attack.instance.attackDmg = Dmg;
-        }    
+        }
     }
 
     private void OnDisable() //오브젝트가 꺼질때 
