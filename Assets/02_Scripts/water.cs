@@ -15,7 +15,7 @@ public class water : MonoBehaviour
             curtime += Time.deltaTime;
             if (curtime >= maxtime)
             {
-                Player_Health.instance.IncDegHp("Water", 10);
+                Player_Health.instance.IncDegHp("Water", 100);
                 curtime = 0;
                 MiddleToastMsg.Instance.showMessage("수분을 보충했습니다.", 0.7f);
             }

@@ -11,11 +11,6 @@ public class ItemInfo : MonoBehaviour
 
     public GameObject HealthPosion;
 
-    public GameObject obj4;
-
-    public GameObject obj5;
-
-    public GameObject obj6;
 
     public static ItemInfo instance;
 
@@ -36,6 +31,7 @@ public class ItemInfo : MonoBehaviour
             case 2:
                 Instantiate(HealthPosion, trans, Quaternion.identity); //»ý¼º
                 break;
+      
             default:
                 break;
         }

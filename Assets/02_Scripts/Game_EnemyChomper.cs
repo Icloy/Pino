@@ -197,12 +197,21 @@ public class Game_EnemyChomper : MonoBehaviour
         Game_Score.instance.killCnt++; //점수용 킬카운트 추가
         yield return new WaitForSeconds(0.5f); // n초 대기후 자기자신 제거
         RandomSel();
+        RandomSel2();
+
         Destroy(gameObject);
     }
 
     void RandomSel()
     {
         int r = Random.Range(0, 10);
+        ItemInfo.instance.dropItem(r, this.transform.position);
+
+    }
+
+    void RandomSel2()
+    {
+        int r = Random.Range(0, 40);
         ItemInfo.instance.dropItem(r, this.transform.position);
     }
 }

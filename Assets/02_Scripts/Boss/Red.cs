@@ -6,6 +6,9 @@ public class Red : MonoBehaviour
 {
     public float AttackDistance;
     public float attackDelay;
+    public AudioClip deathSound; //사망시 재생할 오디오 소스
+    public AudioClip hitSound; //피격시 재생할 오디오 소스
+    public AudioClip attackSound;
 
 
     private AudioSource AudioPlayer; //오디오 소스 컴포넌트
@@ -28,6 +31,11 @@ public class Red : MonoBehaviour
         Die
     }
     BossState bossState;
+    private void Awake()
+    {
+       AudioPlayer = GetComponent<AudioSource>();
+
+    }
 
     void Start()
     {
@@ -69,7 +77,9 @@ public class Red : MonoBehaviour
             curTime += Time.deltaTime;
             if (curTime > attackDelay)
             {
-                anim.SetTrigger("IdleToAttack"); //피격 소리 재생
+                anim.SetTrigger("IdleToAttack");
+                AudioPlayer.PlayOneShot(attackSound); //피격 소리 재생
+
 
                 Instantiate(AttackObject, attackStart.transform.position, Quaternion.identity); //생성
                 curTime = 0f;
@@ -90,7 +100,7 @@ public class Red : MonoBehaviour
             {
                 curHp -= Player_Attack.instance.attackDmg;
 
-               // AudioPlayer.PlayOneShot(hitSound); //피격 소리 재생
+               AudioPlayer.PlayOneShot(hitSound); //피격 소리 재생
             }
             else
             {
@@ -112,7 +122,7 @@ public class Red : MonoBehaviour
     {
         bossState = BossState.Die;
         isdead = true;
-        //AudioPlayer.PlayOneShot(deathSound); //사망 소리 재생
+        AudioPlayer.PlayOneShot(deathSound); //사망 소리 재생
         Game_Score.instance.killCnt+= 100; //점수용 킬카운트 추가
         yield return new WaitForSeconds(2f); // n초 대기후 자기자신 제거
         RandomSel();
@@ -121,7 +131,7 @@ public class Red : MonoBehaviour
 
     void RandomSel()
     {
-        int r = Random.Range(0, 7);
-        ItemInfo.instance.dropItem(r, this.transform.position);
+
+        WeaponInfo.instance.dropItem(0, this.transform.position);
     }
 }

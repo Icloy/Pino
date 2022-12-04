@@ -6,6 +6,12 @@ public class Game_Boss : MonoBehaviour
 {
     public float AttackDistance;
     public float attackDelay;
+    public AudioClip deathSound; //사망시 재생할 오디오 소스
+    public AudioClip hitSound; //피격시 재생할 오디오 소스
+    public AudioClip attackSound;
+
+    private AudioSource AudioPlayer; //오디오 소스 컴포넌트
+
 
     public GameObject attackStart;
     public GameObject AttackObject;
@@ -16,6 +22,12 @@ public class Game_Boss : MonoBehaviour
     private float curHp;
     private float curTime;
     private bool isdead;
+
+    private void Awake()
+    {
+        AudioPlayer = GetComponent<AudioSource>();
+
+    }
 
     enum BossState
     {
@@ -66,6 +78,8 @@ public class Game_Boss : MonoBehaviour
             if (curTime > attackDelay)
             {
                 anim.SetTrigger("IdleToAttack");
+                AudioPlayer.PlayOneShot(attackSound); //피격 소리 재생
+
                 Instantiate(AttackObject, attackStart.transform.position, Quaternion.identity); //생성
                 curTime = 0f;
             }
@@ -85,7 +99,7 @@ public class Game_Boss : MonoBehaviour
             {
                 curHp -= Player_Attack.instance.attackDmg;
 
-                //AudioPlayer.PlayOneShot(hitSound); //피격 소리 재생
+                AudioPlayer.PlayOneShot(hitSound); //피격 소리 재생
             }
             else
             {
@@ -96,10 +110,28 @@ public class Game_Boss : MonoBehaviour
 
     void Die()
     {
+
+        StopAllCoroutines();
+        anim.SetTrigger("Die");//진행중인 피격판정 모두 종료
+        StartCoroutine(DieProcess());
+
+    }
+
+    IEnumerator DieProcess()
+    {
         bossState = BossState.Die;
         isdead = true;
-        anim.SetTrigger("Die");
+        AudioPlayer.PlayOneShot(deathSound); //사망 소리 재생
+        Game_Score.instance.killCnt += 100; //점수용 킬카운트 추가
+        yield return new WaitForSeconds(2f); // n초 대기후 자기자신 제거
+        RandomSel();
         Destroy(gameObject);
+    }
+
+    void RandomSel()
+    {
+
+        WeaponInfo.instance.dropItem(3, this.transform.position);
     }
 
 }
