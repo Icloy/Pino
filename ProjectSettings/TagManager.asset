@@ -8,11 +8,12 @@ TagManager:
   - ToastMsg
   - Weapon
   - Enemy
+  - Floor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Floor
   - Water
   - UI
   - Item
