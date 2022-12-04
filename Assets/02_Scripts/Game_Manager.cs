@@ -182,6 +182,7 @@ public class Game_Manager : MonoBehaviour
 
     public void GameOverBtn() //게임오버 버튼 클릭시
     {
+        addScore.instance.SendScoreBtn();
         GameOverPanel.SetActive(false);
         SceneManager.LoadScene("Main_Scene");
     }
