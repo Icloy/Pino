@@ -61,7 +61,7 @@ public class Player_Manager : MonoBehaviour
         {
             if(Player_Health.instance.WaterCurrentHp > 10)
             {
-                speed = 12;
+                speed = 50;
                 curTime += Time.deltaTime;
                 if (curTime > maxTime)
                 {
@@ -74,7 +74,7 @@ public class Player_Manager : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            speed = 6;
+            speed = 12;
         }
     }
     private float curTime = 0f;

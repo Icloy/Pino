@@ -115,6 +115,7 @@ public class Red : MonoBehaviour
         StopAllCoroutines();
         anim.SetTrigger("Die");//진행중인 피격판정 모두 종료
         StartCoroutine(DieProcess());
+        
 
     }
 
@@ -123,10 +124,15 @@ public class Red : MonoBehaviour
         bossState = BossState.Die;
         isdead = true;
         AudioPlayer.PlayOneShot(deathSound); //사망 소리 재생
-        Game_Score.instance.killCnt+= 100; //점수용 킬카운트 추가
+        Game_Score.instance.killCnt+= 10; //점수용 킬카운트 추가
         yield return new WaitForSeconds(2f); // n초 대기후 자기자신 제거
         RandomSel();
         Destroy(gameObject);
+        if (isdead)
+        {
+            Game_Manager.instance.bossKillCnt++;
+            
+        }
     }
 
     void RandomSel()
