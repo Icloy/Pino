@@ -19,7 +19,10 @@ public class Game_Manager : MonoBehaviour
     bool isPause;
 
     public static Game_Manager instance;
-    
+
+    public int bossKillCnt = 1;
+    public Text GameOC;
+
 
     private void Awake()
     {
@@ -69,6 +72,11 @@ public class Game_Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) //P버튼이 눌렸을 경우 
         {
             pauseBtn(); //함수 실행
+        }
+
+        if(bossKillCnt == 5)
+        {
+            ClearGame();
         }
     }
    
@@ -174,10 +182,11 @@ public class Game_Manager : MonoBehaviour
 
     public void GameOver() //게임 오버처리
     {
+        GameOverPanel.SetActive(true);
+        GameOC.text = "Game Over";
         Time.timeScale = 0;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         Game_Score.instance.PrintScore();
-        GameOverPanel.SetActive(true);
     }
 
     public void GameOverBtn() //게임오버 버튼 클릭시
@@ -186,10 +195,13 @@ public class Game_Manager : MonoBehaviour
         GameOverPanel.SetActive(false);
         SceneManager.LoadScene("Main_Scene");
     }
-    /*
-    public static implicit operator Game_Manager(ItemInfo v)
+
+    public void ClearGame()
     {
-        //throw new NotImplementedException();
+        GameOverPanel.SetActive(true);
+        GameOC.text = "Game Clear";
+        Time.timeScale = 0;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        Game_Score.instance.PrintScore();
     }
-    */
 }
