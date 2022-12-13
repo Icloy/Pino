@@ -1,0 +1,14 @@
+{
+    "UserName": "test01",
+    "HungryHp": 100.0,
+    "WaterHp": 100.0,
+    "MentalHp": 100.0,
+    "playerPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "Date": 1,
+    "curTime": 0.0,
+    "chomPos": []
+}

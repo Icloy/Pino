@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
-using UnityEditor.VersionControl;
-using Unity.VisualScripting;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -35,11 +33,11 @@ public class Game_Manager : MonoBehaviour
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         GameOverPanel.SetActive(false);
 
-        //저장데이터가 있다면 플레이어를 저장위치로 이동
-        if (!(DataManager.instance.nowPlayer.playerPos.x == 0 && DataManager.instance.nowPlayer.playerPos.z == 0))
+       if (!(DataManager.instance.nowPlayer.playerPos.x == 10 && DataManager.instance.nowPlayer.playerPos.z == 4))
         {
             player.transform.position = DataManager.instance.nowPlayer.playerPos;
         }
+
         if (DataManager.instance.nowPlayer.chomPos.Length != 0) //필드에 촘퍼 저장값이있다면.
         {
             for (int i = 0; i < DataManager.instance.nowPlayer.chomPos.Length; i++) //wave의 수만큼 반복문 실행

@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
             //Hud.OpenMessagePanel("");
             if (one)
             {
-                MiddleToastMsg.Instance.showMessage("È¹µæ FÅ°", 1f);
+                MiddleToastMsg.Instance.showMessage("È¹µæ FÅ°", 0.7f);
                 one = false;
             }
 
